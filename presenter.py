@@ -1,4 +1,3 @@
-
 class JsoneFormater:
 
     def __init__(self):
@@ -10,3 +9,6 @@ class JsoneFormater:
             "content": "",
             "type_report": "",
         }
+
+    def get_format(self):
+        return self.json_format
