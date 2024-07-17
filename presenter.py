@@ -7,7 +7,7 @@ class JsoneFormater:
             "description": "",
             "date": "",
             "content": "",
-            "type_report": "",
+            "typeReport": "",
         }
 
     def get_format(self):
