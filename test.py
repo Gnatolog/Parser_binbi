@@ -5,7 +5,10 @@ import re
 
 # url_hello = 'http://147.45.152.87:8080/api/v1/openai/hello'
 # url_add_article = 'http://147.45.152.87:8080/api/v1/article/addArticle'
-# url_get_all_article = 'http://147.45.152.87:8080//api/v1/article/findAllArticles'
+# url_get_all_article = 'http://147.45.152.87:8080/api/v1/article/findAllArticles'
+# url_add_report = 'http://147.45.152.87:8080/api/v1/openai/addReport'
+# url_get_report_type = "http://147.45.152.87:8080/api/v1/report/findReports/MARKET_OVERVIEW"
+
 #
 #
 #
@@ -19,10 +22,16 @@ import re
 # }
 #
 #
+
+# data_add_report = {
+#     "typeReport": "MARKET_OVERVIEW",
+#     "title": "First",
+#     "description": "My First"
+# }
+
 # headers = {
 #     'Content-Type': 'application/json'
 # }
-
 
 # Проверка связи
 # response = requests.get(url_hello)    # OK
@@ -32,6 +41,13 @@ import re
 
 # Запрос на получение всех статей
 # response = requests.get(url_get_all_article) # OK
+
+#Запрос формирование отчета
+
+# response = requests.post(url_add_report, data=json.dumps(data_add_report),headers=headers)
+
+#Запрос на получение отчета
+# response = requests.get(url_get_report_type)
 
 
 #
@@ -92,41 +108,40 @@ import re
 # method_request_db
 
 
-request_list = ["В Татарстане создадут кластер разработки компьютерных игр 9",
-                "В Татарстане создадут кластер разработки компьютерных игр 2",
-                "В Татарстане создадут кластер разработки компьютерных игр 3",
-                "В Татарстане создадут кластер разработки компьютерных игр 5", ]
+# request_list = ["В Татарстане создадут кластер разработки компьютерных игр 9",
+#                 "В Татарстане создадут кластер разработки компьютерных игр 2",
+#                 "В Татарстане создадут кластер разработки компьютерных игр 3",
+#                 "В Татарстане создадут кластер разработки компьютерных игр 5", ]
 
 
-def request_db(request: list):
-
-    with open('db_article.json', "r", encoding='utf-8') as fl:
-        db = json.load(fl)
-        for art in db:
-            if request[0] in art.keys():
-                print("Возвращаем уже существующий отчет")
-                return art.values()
-
-            else:
-                for request_art in request:
-                    if request_art in art.keys():
-                        print("запуск генерацию отчета")
-                        index_art = db.index(art)
-                        art[request[0]] = art[request_art]
-                        db[index_art].pop(request_art)
-                        with open('db_article.json', 'w', encoding='utf-8') as file_update:
-                            json.dump(db, file_update, ensure_ascii=False, indent=2)
-                        return " возвращаем обновленный Отчёт"
-                    else:
-                        print("догружаем статьи а ии")
-
-                print("запускаем отчет на формирование")
-
-                art[request[0]] = {"new_report": "response"}
-                with open('db_article.json', 'w', encoding='utf-8') as file_new:
-                    json.dump(db, file_new, ensure_ascii=False, indent=2)
-
-                return 'Возвращаем новый отчёт'
-
-
-print(request_db(request_list))
+# def request_db(request: list):
+#     with open('db_article.json', "r", encoding='utf-8') as fl:
+#         db = json.load(fl)
+#         for art in db:
+#             if request[0] in art.keys():
+#                 print("Возвращаем уже существующий отчет")
+#                 return art.values()
+#
+#             else:
+#                 for request_art in request:
+#                     if request_art in art.keys():
+#                         print("запуск генерацию отчета")
+#                         index_art = db.index(art)
+#                         art[request[0]] = art[request_art]
+#                         db[index_art].pop(request_art)
+#                         with open('db_article.json', 'w', encoding='utf-8') as file_update:
+#                             json.dump(db, file_update, ensure_ascii=False, indent=2)
+#                         return " возвращаем обновленный Отчёт"
+#                     else:
+#                         print("догружаем статьи а ии")
+#
+#                 print("запускаем отчет на формирование")
+#
+#                 art[request[0]] = {"new_report": "response"}
+#                 with open('db_article.json', 'w', encoding='utf-8') as file_new:
+#                     json.dump(db, file_new, ensure_ascii=False, indent=2)
+#
+#                 return 'Возвращаем новый отчёт'
+#
+#
+# print(request_db(request_list))
