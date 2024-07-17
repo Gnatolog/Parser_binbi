@@ -7,5 +7,5 @@ def save_json(data):
     :param data:
     :return:
     """
-    with open("jsonFiles.json", "w", encoding='utf-8') as fl:
+    with open("db_article.json", "w", encoding='utf-8') as fl:
         json.dump(fp=fl, indent=4, obj=data, ensure_ascii=False)

@@ -14,7 +14,7 @@ chrome_options.add_argument("--headless=new")  # for Chrome >= 109
 # chrome_options.headless = True # also works
 driver = webdriver.Chrome()  # режим браузера:  options true безгаловый
 
-qweru = 'Киберспорт'
+qweru = 'Футбол'
 #
 
 rdc = Parser(qweru)
